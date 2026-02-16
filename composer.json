@@ -39,5 +39,10 @@
     "config": {
         "sort-packages": true
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "homepage": "https://aivory.net/monitor/",
+    "support": {
+        "issues": "https://github.com/aivorynet/agent-php/issues",
+        "source": "https://github.com/aivorynet/agent-php"
+    }
 }
