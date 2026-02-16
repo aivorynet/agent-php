@@ -1,0 +1,43 @@
+{
+    "name": "aivory/monitor",
+    "description": "AIVory Monitor - Runtime exception monitoring agent for PHP applications",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["monitoring", "exceptions", "debugging", "apm", "observability"],
+    "authors": [
+        {
+            "name": "AIVory",
+            "email": "support@aivory.net"
+        }
+    ],
+    "require": {
+        "php": ">=8.0",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.0",
+        "phpstan/phpstan": "^1.0"
+    },
+    "suggest": {
+        "ext-sockets": "Required for WebSocket communication",
+        "textalk/websocket": "Alternative WebSocket client"
+    },
+    "autoload": {
+        "psr-4": {
+            "AIVory\\Monitor\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "AIVory\\Monitor\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "analyze": "phpstan analyse src"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "stable"
+}
