@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AIVory\Monitor;
 
+use AIVory\Monitor\Breakpoint\BreakpointManager;
 use AIVory\Monitor\Capture\ExceptionCapture;
 use AIVory\Monitor\Transport\BackendConnection;
 
@@ -34,6 +35,7 @@ class Agent
     private Config $config;
     private BackendConnection $connection;
     private ExceptionCapture $exceptionCapture;
+    private ?BreakpointManager $breakpointManager = null;
     /** @var array<string, mixed> */
     private array $customContext = [];
     /** @var array<string, mixed>|null */
@@ -88,6 +90,17 @@ class Agent
 
         // Install exception handlers
         self::$instance->exceptionCapture->install();
+
+        // Initialize breakpoint support
+        if ($config->enableBreakpoints) {
+            self::$instance->breakpointManager = new BreakpointManager($config, self::$instance->connection);
+            self::$instance->connection->on('set_breakpoint', function (array $payload) {
+                self::$instance->breakpointManager?->handleCommand('set', $payload);
+            });
+            self::$instance->connection->on('remove_breakpoint', function (array $payload) {
+                self::$instance->breakpointManager?->handleCommand('remove', $payload);
+            });
+        }
 
         // Connect to backend
         self::$instance->connection->connect();
@@ -180,6 +193,20 @@ class Agent
         }
 
         self::$instance->connection->processMessages();
+    }
+
+    /**
+     * Triggers a non-breaking breakpoint capture.
+     * Only captures if the breakpoint ID has been registered by the backend.
+     * Place this call at locations where you want to capture context.
+     */
+    public static function breakpoint(string $id): void
+    {
+        if (!self::$initialized || self::$instance === null) {
+            return;
+        }
+
+        self::$instance->breakpointManager?->hit($id);
     }
 
     /**

@@ -152,6 +152,19 @@ class BackendConnection
     }
 
     /**
+     * Sends a breakpoint hit to the backend.
+     *
+     * @param array<string, mixed> $payload
+     */
+    public function sendBreakpointHit(string $breakpointId, array $payload): void
+    {
+        $payload['breakpoint_id'] = $breakpointId;
+        $payload['agent_id'] = $this->agentId;
+
+        $this->send('breakpoint_hit', $payload);
+    }
+
+    /**
      * Sends a heartbeat to keep the connection alive.
      */
     public function sendHeartbeat(): void
