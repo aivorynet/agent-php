@@ -66,7 +66,7 @@ class Agent
         } else {
             $config = new Config(
                 apiKey: $options['apiKey'] ?? getenv('AIVORY_API_KEY') ?: '',
-                backendUrl: $options['backendUrl'] ?? getenv('AIVORY_BACKEND_URL') ?: 'wss://api.aivory.net/ws/monitor/agent',
+                backendUrl: $options['backendUrl'] ?? getenv('AIVORY_BACKEND_URL') ?: 'wss://api.aivory.net/monitor/agent',
                 environment: $options['environment'] ?? getenv('AIVORY_ENVIRONMENT') ?: 'production',
                 applicationName: $options['applicationName'] ?? getenv('AIVORY_APP_NAME') ?: null,
                 samplingRate: (float)($options['samplingRate'] ?? getenv('AIVORY_SAMPLING_RATE') ?: 1.0),

@@ -22,7 +22,7 @@ class Config
 
     public function __construct(
         string $apiKey = '',
-        string $backendUrl = 'wss://api.aivory.net/ws/monitor/agent',
+        string $backendUrl = 'wss://api.aivory.net/monitor/agent',
         string $environment = 'production',
         ?string $applicationName = null,
         float $samplingRate = 1.0,
@@ -51,7 +51,7 @@ class Config
     {
         return new self(
             apiKey: getenv('AIVORY_API_KEY') ?: '',
-            backendUrl: getenv('AIVORY_BACKEND_URL') ?: 'wss://api.aivory.net/ws/monitor/agent',
+            backendUrl: getenv('AIVORY_BACKEND_URL') ?: 'wss://api.aivory.net/monitor/agent',
             environment: getenv('AIVORY_ENVIRONMENT') ?: 'production',
             applicationName: getenv('AIVORY_APP_NAME') ?: null,
             samplingRate: (float)(getenv('AIVORY_SAMPLING_RATE') ?: 1.0),

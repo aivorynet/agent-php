@@ -44,7 +44,7 @@ class BackendConnection
             $scheme = $urlParts['scheme'] ?? 'wss';
             $host = $urlParts['host'] ?? 'api.aivory.net';
             $port = $urlParts['port'] ?? ($scheme === 'wss' ? 443 : 80);
-            $path = $urlParts['path'] ?? '/ws/monitor/agent';
+            $path = $urlParts['path'] ?? '/monitor/agent';
 
             $context = stream_context_create([
                 'ssl' => [
@@ -250,7 +250,7 @@ class BackendConnection
             'environment' => $this->config->environment,
             'runtime' => 'php',
             'runtime_version' => PHP_VERSION,
-            'agent_version' => '1.0.0',
+            'agent_version' => '0.1.1',
         ];
 
         if ($this->config->applicationName !== null) {
