@@ -44,7 +44,7 @@ class BackendConnection
             $scheme = $urlParts['scheme'] ?? 'wss';
             $host = $urlParts['host'] ?? 'api.aivory.net';
             $port = $urlParts['port'] ?? ($scheme === 'wss' ? 443 : 80);
-            $path = $urlParts['path'] ?? '/monitor/agent';
+            $path = $urlParts['path'] ?? '/ws/agent';
 
             $context = stream_context_create([
                 'ssl' => [
@@ -250,7 +250,7 @@ class BackendConnection
             'environment' => $this->config->environment,
             'runtime' => 'php',
             'runtime_version' => PHP_VERSION,
-            'agent_version' => '0.1.1',
+            'agent_version' => '0.1.2',
         ];
 
         if ($this->config->applicationName !== null) {
@@ -362,6 +362,10 @@ class BackendConnection
         if ($this->config->debug) {
             echo "[AIVory Monitor] Reconnecting in {$delay}ms (attempt {$this->reconnectAttempts})\n";
         }
+
+        // Sleep for the computed delay then attempt reconnection
+        usleep((int)($delay * 1000));
+        $this->connect();
     }
 
     private function generateAgentId(): string

@@ -119,7 +119,7 @@ Configure the agent using environment variables or initialization options:
 | Variable | Description | Default |
 |----------|-------------|---------|
 | `AIVORY_API_KEY` | Agent authentication key | Required |
-| `AIVORY_BACKEND_URL` | Backend WebSocket URL | `wss://api.aivory.net/monitor/agent/v1` |
+| `AIVORY_BACKEND_URL` | Backend WebSocket URL | `wss://api.aivory.net/ws/agent` |
 | `AIVORY_ENVIRONMENT` | Environment name (e.g., production, staging) | `production` |
 | `AIVORY_SAMPLING_RATE` | Exception sampling rate (0.0 to 1.0) | `1.0` |
 | `AIVORY_MAX_DEPTH` | Maximum depth for variable capture | `3` |

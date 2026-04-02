@@ -4,6 +4,12 @@ All notable changes to the AIVory Monitor PHP Agent will be documented in this f
 
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [0.1.2] - 2026-04-02
+
+### Fixed
+- Updated WebSocket endpoint from `/monitor/agent` to `/ws/agent`
+- Fixed `scheduleReconnect()` to actually perform reconnection after delay (was dead code)
+
 ## [0.1.1] - 2026-02-27
 
 ### Changed
